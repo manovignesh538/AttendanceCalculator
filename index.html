@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIT-AP Attendance Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6e6e6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #4285f4; /* Google Blue */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        #logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #vitap-logo {
+            max-width: 300px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #vitap-logo:hover {
+            transform: scale(1.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        input {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #34a853; /* Google Green */
+            color: #fff;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #2d8e2e; /* Darker green on hover */
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>VIT-AP Attendance Calculator</h1>
+    </header>
+    <section>
+        <div id="logo-container">
+            <img id="vitap-logo" src="vitap-logo.png" alt="VIT-AP University Logo">
+        </div>
+
+        <label for="attendedClasses">Classes Attended:</label>
+        <input type="number" id="attendedClasses" placeholder="Enter the number of classes attended">
+
+        <label for="totalClasses">Total Classes Completed:</label>
+        <input type="number" id="totalClasses" placeholder="Enter the total number of classes completed">
+
+        <button onclick="calculateAttendance()">Calculate</button>
+
+        <p id="result"></p>
+    </section>
+
+    <script>
+        function calculateAttendance() {
+            var attendedClasses = document.getElementById("attendedClasses").value;
+            var totalClasses = document.getElementById("totalClasses").value;
+
+            if (attendedClasses === "" || totalClasses === "") {
+                alert("Please enter both classes attended and total classes completed.");
+                return;
+            }
+
+            var attendancePercentage = (attendedClasses / totalClasses) * 100;
+            var classesToAttend = Math.ceil(((0.8 * totalClasses) - attendedClasses) / 0.2);
+
+            document.getElementById("result").innerHTML = "Your current attendance: " + attendancePercentage.toFixed(2) + "%<br>" +
+                                                            "Number of classes to attend for 80% attendance: " + classesToAttend;
+        }
+    </script>
+</body>
+</html>
